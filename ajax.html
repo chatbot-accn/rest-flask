@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+<!–– below are the style sheet funtions ––>	
+ <style>
+        html, body {
+            margin: 0;
+            height: 100%;
+            font-family: 'Open Sans',serif;
+        }
+        #sidebar{
+            background:rgba(0,0,13,0.84);
+            height:100%;
+            width:20%;
+            color:white;
+            float:left;
+        }
+       
+        #userdetails {
+            width: 100%;
+            height: 20%;
+            border-bottom: 1px solid white;
+        }
+        #usercontainer {
+            padding: 5%;
+          
+        }
+        #username>span{
+            display:block;
+            font-size:11px;
+        }
+        #userimage{
+            width:30px;
+            height:30px;
+            background:white;
+            border:1px solid white;
+            border-radius:50%;
+            float:left;
+            margin-right:10px;
+        }
+        ul{
+            list-style:none;
+            padding-left:20px !important;
+        }
+        #sidebar a {
+            color: white;
+            font-size: 14px;
+            text-decoration:none;
+            text-transform:capitalize;
+            line-height:30px;
+        }
+        i{
+            margin-right:10px;
+        }
+        #kpiContainer ul{
+            padding-left:0px !important;
+        }
+        #kpiContainer li {
+            height: 30px;
+            background: #b3d98c;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            padding: 5px;
+            padding-top: 15px;
+            color: white;
+            -webkit-box-shadow: 4px 7px 5px 0px rgba(130,128,130,1);
+            -moz-box-shadow: 4px 7px 5px 0px rgba(130,128,130,1);
+            box-shadow: 4px 7px 5px 0px rgba(130,128,130,1);
+        }
+    </style>
+ 
+</head>
+
+ <aside id="sidebar"><!–– calling the sidebar function ––>
+<div id="userdetails"><!–– top left of the page ––>
+    <div id="usercontainer">
+        <div id="userimage"></div>
+        <div id="username">Dashboard_Assistant<span>@Accenture</span></div>
+    </div>
+</div>
+        <div style="padding:10px">
+            <p>CHOOSE YOUR BOT</p>
+           <ul>
+               <li><a href="#"><i class="fa fa-bar-chart"></i>StatChat Bot</a></li>
+               <li><a href="#"><i class="fa fa-line-chart"></i>RiskAnalytics Bot</a></li>
+           </ul>
+           
+           
+        </div>
+    </aside>
+    <section id="content" style="float:left;width:80%;height: 100%;">
+	
+		<!–– This section is copied directly from dialogflow ––>
+        <section id="botContainer" style="width:70%;float:left;height:100%"><iframe
+    allow="microphone;"
+    width="89%"
+    height="87%"
+    
+    src="https://console.dialogflow.com/api-client/demo/embedded/1907b2c5-e39c-4613-885a-83cb7785ed1e" style="border: 50px rgba(0,0,10,.75) inset;">
+    
+</iframe>
+
+
+</section>
+        <section id="kpiContainer" style="width:30%;float:left;background:#ebebeb;height:100%">
+
+            <div style="height:70%;margin-top:30%">
+                <div style="padding:10px">
+                    <ul>
+                        <li>KPI: <span id="kpi"></span></li> <!–– span is used to call function ––>
+                        <li>Financial Year: <span id="financial_year"></span></li>
+                        <li>Product: <span id="product"></span></li>
+                        <li>BS: <span id="bs"></span></li>
+                        <li>Branch: <span id="branch"></span></li>
+                        <li>Zone: <span id="zone"></span></li>
+                    </ul>
+                </div>
+<!–– alter the below tag to get things in proportion ––>				
+<button type="button" onclick="#" style="position: absolute; bottom: 79.7%; left: 23.2%;  padding: 9.7px 288.3px; font-size: 10px;  border: none; width: 288.3px float:left; ">Developed by: Risk Analytics team @Accenture</button>
+
+<p> <a href="http://127.0.0.1:5000/plots" target="_blank"><button  style="position: absolute; bottom: 20%; left: 80.5%; padding: 15px 5px; background-color: rgba(0,0,13,0.84); border: none; color: white;
+ border-radius: 5px; -webkit-box-shadow: 4px 7px 5px 0px rgba(130,128,130,1);
+            -moz-box-shadow: 4px 7px 5px 0px rgba(130,128,130,1);
+            box-shadow: 4px 7px 5px 0px rgba(130,128,130,1); ">Click here after querying for graphs</button>
+ </a>
+ </p>  
+
+
+<button type="button" onclick="loadDoc()" style="position: absolute; bottom: 10%; left: 80.5%; padding: 15px 5px; background-color: rgba(0,0,13,0.84); border: none; color: white;
+ border-radius: 5px; -webkit-box-shadow: 4px 7px 5px 0px rgba(130,128,130,1);
+            -moz-box-shadow: 4px 7px 5px 0px rgba(130,128,130,1);
+            box-shadow: 4px 7px 5px 0px rgba(130,128,130,1); ">Click here to get current parameters</button>
+            </div>
+
+        </section>
+
+    </section>
+<script>
+
+<!–– This is important. This is used to connect HTML to python ––>
+
+function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("kpi").innerHTML = JSON.parse(this.responseText).KPI;
+document.getElementById("product").innerHTML = JSON.parse(this.responseText).Product;
+document.getElementById("bs").innerHTML = JSON.parse(this.responseText).Business_Segment;
+document.getElementById("zone").innerHTML = JSON.parse(this.responseText).Zone;
+document.getElementById("branch").innerHTML = JSON.parse(this.responseText).Branch;
+document.getElementById("financial_year").innerHTML = JSON.parse(this.responseText).Financial_Year;
+document.getElementById("link").innerHTML = JSON.parse(this.responseText).Link;
+    }
+  };
+  xhttp.open("POST", "http://127.0.0.1:5000/htmlcode", true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send("random");
+}
+loadDoc();
+</script>
+</html>
