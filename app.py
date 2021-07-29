@@ -33,7 +33,10 @@ sheet2 = pd.read_excel(xls, 'Dimensions')
 
 app = Flask(__name__)
 
-@app.route('/')  # this is the home page route
+@app.route('/') # this is the home page route
+def hello_world(): # this is the home page function that generates the page code
+    return "Hello world!"
+ 
 # all requests from dialogflow will go throught webhook function
 @app.route('/webhook', methods=['POST'])
 def webhook():
