@@ -24,7 +24,7 @@ logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(filename)s - %(funcName)s - %(message)s')
 
 
-xls = pd.ExcelFile(r'C:\Users\ashok.kumar.b.t\Downloads\chatbot\Credit_Risk-Dummy Input Data-20190522.xlsx')
+xls = pd.ExcelFile(r'Credit_Risk-Dummy Input Data-20190522.xlsx')
 data = pd.read_excel(xls, 'Data')
 sheet2 = pd.read_excel(xls, 'Dimensions')
 
